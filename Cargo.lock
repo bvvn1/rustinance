@@ -1795,6 +1795,7 @@ version = "0.1.0"
 dependencies = [
  "actix-web",
  "argon2",
+ "once_cell",
  "reqwest",
  "serde",
  "sqlx",
