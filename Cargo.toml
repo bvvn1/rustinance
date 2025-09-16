@@ -1,0 +1,13 @@
+[package]
+name = "rustinance"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+actix-web = "4.11.0"
+argon2 = "0.5.3"
+reqwest = "0.12.23"
+serde = "1.0.225"
+sqlx = "0.8.6"
+tokio = { version = "1.47.1", features = ["full"] }
+uuid = "1.18.1"
