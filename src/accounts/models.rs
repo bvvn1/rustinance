@@ -1,3 +1,4 @@
+use serde::Deserialize;
 use uuid::Uuid;
 
 pub struct Account {
@@ -5,4 +6,10 @@ pub struct Account {
     name: String,
     balance: u64,
     password_hash: String,
+}
+
+#[derive(Deserialize)]
+pub struct SignupRequest {
+    pub username: String,
+    pub password: String,
 }

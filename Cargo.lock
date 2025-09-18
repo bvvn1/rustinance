@@ -1796,6 +1796,7 @@ dependencies = [
  "actix-web",
  "argon2",
  "once_cell",
+ "password-hash",
  "reqwest",
  "serde",
  "sqlx",
