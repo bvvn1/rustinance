@@ -5,7 +5,7 @@ use argon2::{
 };
 
 use argon2::PasswordHasher;
-use sqlx::{PgPool, Pool, Postgres};
+use sqlx::{Pool, Postgres};
 
 use crate::accounts::models::SignupRequest;
 
@@ -29,20 +29,24 @@ pub async fn user_signup(
         Err(_) => return HttpResponse::InternalServerError().body("Hashing failed"),
     };
 
-    let result = sqlx::query!(
+    match sqlx::query(
         r#"
-        INSERT INTO users (username, password_hash)
-        VALUES ($1, $2)
-        "#,
-        req.username,
-        hashed
+            INSERT INTO users (username, password_hash)
+            VALUES ($1, $2)
+            "#,
     )
+    .bind(req.username.clone())
+    .bind(hashed.clone())
     .execute(db.get_ref())
-    .await;
+    .await
+    {
+        Ok(e) => e,
+        Err(_) => return HttpResponse::InternalServerError().body("Error during signup query"),
+    };
 
-    Ok(())
+    HttpResponse::Ok().finish()
 }
 
-pub async fn accounts_scope() -> actix_web::Scope {
+pub fn accounts_scope() -> actix_web::Scope {
     web::scope("/account").service(user_signup)
 }

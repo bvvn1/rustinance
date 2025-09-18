@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: FinanceDB
+
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+
+
+volumes:
+ postgres_data:
