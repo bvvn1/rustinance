@@ -14,3 +14,5 @@ serde = "1.0.225"
 sqlx = { version = "0.8.6", features = ["postgres", "runtime-tokio"] }
 tokio = { version = "1.47.1", features = ["full"] }
 uuid = "1.18.1"
+utoipa = "5"
+utoipa-swagger-ui = { version = "9.0.0", features = ["actix-web", "vendored"] }
